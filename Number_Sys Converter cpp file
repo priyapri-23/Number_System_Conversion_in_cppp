@@ -1,0 +1,93 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+class NumberSystemConverter {
+public:
+    string dec2Bin(int dec) {
+        string bin = "";
+
+        while (dec > 0) {
+            int remainder = dec % 2;
+            bin = to_string(remainder) + bin;
+            dec /= 2;
+        }
+
+        return bin;
+    }
+
+    int bin2Dec(string bin) {
+        int dec = 0;
+        int n = bin.length();
+
+        for (int i = 0; i < n; ++i) {
+            int digit = bin[i] - '0';
+            dec += digit * pow(2, n - 1 - i);
+        }
+
+        return dec;
+    }
+
+    string dec2Oct(int dec) {
+        string oct = "";
+
+        while (dec > 0) {
+            int remainder = dec % 8;
+            oct = to_string(remainder) + oct;
+            dec /= 8;
+        }
+
+        return oct;
+    }
+
+    int octToDec(string oct) {
+        int dec = 0;
+        int n = oct.length();
+
+        for (int i = 0; i < n; ++i) {
+            int digit = oct[i] - '0';
+            dec += digit * pow(8, n - 1 - i);
+        }
+
+        return dec;
+    }
+};
+
+int main() {
+    NumberSysConverter converter;
+
+    // Binary to Decimal Conversion
+    string binaryInput;
+    cout << "Enter a binary number: "<<endl;
+    cin >> binaryInput;
+
+    int decimalResult = converter.bin2Dec(binaryInput);
+    cout << "Decimal representation: " << decimalResult << endl;
+
+    // Decimal to Binary Conversion
+    int decimalInput;
+    cout << "Enter a decimal number: ";
+    cin >> decimalInput;
+
+    string binaryResult = converter.dec2Bin(decimalInput);
+    cout << "Binary representation: " << binaryResult << endl;
+
+    // Decimal to Octal Conversion
+    int octalInput;
+    cout << "Enter an octal number: "<<endl;
+    cin >> octalInput;
+
+    string octalResult = converter.dec2Oct(octalInput);
+    cout << "Octal representation: " << octalResult << endl;
+
+    // Octal to Decimal Conversion
+    string octalInputStr;
+    cout << "Enter an octal number as string: ";
+    cin >> octalInputStr;
+
+    int decimalResultFromOctal = converter.oct2Dec(octalInputStr);
+    cout << "Decimal representation: " << decimalResultFromOctal << endl;
+
+    return 0;
+}
